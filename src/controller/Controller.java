@@ -20,8 +20,14 @@ public class Controller implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		case " ":
-			
+		case Events.EVENT_START_GAME:
+			view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
+			break;
+		case Events.EVENT_STORE_GAME:
+			view.getCardLayout().show(view.getBody(), Events.EVENT_STORE_GAME);
+			break;
+		case Events.EVENT_EXIT_GAME:
+			view.dispose();
 			break;
 		default:
 			break;

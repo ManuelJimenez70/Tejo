@@ -1,7 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.CardLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 
@@ -10,16 +10,14 @@ import javax.swing.JFrame;
 public class View extends JFrame{
 
 	private static final String TITTLE = "Titulo";
-	private Header header;
 	private Body body;
-	private Footer footer;
 	
 	
 	public View(ActionListener actionListener) {
 		super();
-		//this.setIconImage(Toolkit.getDefaultToolkit().getImage(View.class.getResource("/resource/images/titleIcon.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(View.class.getResource("/resources/images/iconTittle.png")));
 		this.setTitle(TITTLE);
-		this.setSize(new Dimension(500, 600));
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		initComponents(actionListener);
@@ -29,12 +27,17 @@ public class View extends JFrame{
 	}
 
 	private void initComponents(ActionListener actionListener) {
-		this.header = new Header(actionListener);
 		this.body = new Body(actionListener);
-		this.footer = new Footer(actionListener);
-		this.add(this.header,BorderLayout.NORTH);
 		this.add(this.body,BorderLayout.CENTER);
-		this.add(this.footer, BorderLayout.SOUTH);
 	}
+	
+	public CardLayout getCardLayout() {
+		return body.getCardLayout();
+	}
+
+	public Body getBody() {
+		return body;
+	}
+	
 	
 }
