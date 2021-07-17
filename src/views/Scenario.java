@@ -40,6 +40,7 @@ public class Scenario extends JPanel {
 	}
 
 	private void paintBackground() {
+		System.out.print("hola");
 		if (background == null) {
 			background = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		}
