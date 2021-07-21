@@ -9,4 +9,5 @@ public interface ITejo {
 	int[] getPowerLine();
 	int getMechaX();
 	int getScore();
+	int getTries();
 }

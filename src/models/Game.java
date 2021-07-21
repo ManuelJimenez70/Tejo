@@ -1,9 +1,11 @@
 package models;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends Thread implements ITejo {
 
+	public static final int MAX_SHOOTS = 5;
 	private Tejo tejo;
 	private Gamer gamer;
 	private Arrow arrow;
@@ -21,7 +23,7 @@ public class Game extends Thread implements ITejo {
 		box = new TejoBox();
 		arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE, random.nextInt(Arrow.MAX_ANGLE));
 		play = true;
-		shoots = 1;
+		shoots = 0;
 		start();
 	}
 
@@ -42,21 +44,18 @@ public class Game extends Thread implements ITejo {
 		if (box.checkMechaCollision(tejo)) {
 			score += Mecha.SCORE_MECHA;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Mecha: " + score);
-
 		}
 		if (box.checkTejoBoxCollision(tejo)) {
 			score += TejoBox.SCORE_TEJOBOX;
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Arena: " + score);
 		}
 
 	}
@@ -64,9 +63,8 @@ public class Game extends Thread implements ITejo {
 	private void generateNewTejo() {
 		if (tejo.isShooted()) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			tejo = new Tejo(); 
@@ -155,6 +153,11 @@ public class Game extends Thread implements ITejo {
 	@Override
 	public int getScore() {
 		return score;
+	}
+
+	@Override
+	public int getTries() {
+		return 5- shoots;
 	}
 
 

@@ -26,6 +26,7 @@ public class View extends JFrame {
 		initComponents(actionListener, keyListener);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		this.setUndecorated(true);
 		this.setVisible(true);
 	}
 

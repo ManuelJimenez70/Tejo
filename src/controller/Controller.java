@@ -53,7 +53,7 @@ public class Controller implements ActionListener, KeyListener {
 
 	private void updateUi() {
 		final Timer timerUpdater = new Timer(1, e -> {
-			if (game.getShootsNumber() == 5) {
+			if (game.getShootsNumber() == Game.MAX_SHOOTS) {
 				((Timer) e.getSource()).stop();
 				view.getCardLayout().show(view.getBody(), Events.EVENT_GAME_OVER);
 
@@ -63,7 +63,7 @@ public class Controller implements ActionListener, KeyListener {
 		});
 		timerUpdater.start();
 	}
-	
+
 	public void updatePower() {
 		final Timer timerUpdater = new Timer(1, e -> {
 			if (game.isShooting()) {
@@ -73,7 +73,6 @@ public class Controller implements ActionListener, KeyListener {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				game.updatePower();

@@ -36,8 +36,8 @@ public class Scenario extends JPanel {
 
 	public Scenario(ActionListener actionListener, KeyListener keyListener) {
 		Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(new Dimension(s.width,s.height-PanelGame.SIZE_HEADER));
-		setPreferredSize(new Dimension(s.width,s.height));
+		setSize(new Dimension(s.width, s.height - PanelGame.SIZE_HEADER));
+		setPreferredSize(new Dimension(s.width, s.height));
 		setLayout(new BorderLayout());
 		setFocusCycleRoot(true);
 		setFocusable(true);
@@ -61,19 +61,27 @@ public class Scenario extends JPanel {
 		paintScore(gameData);
 		paintArrow(gameData);
 		paintPower(gameData);
+		paintTries(gameData);
 		repaint();
 	}
+
 	private void paintScore(ITejo gameData) {
 		Graphics g = background.getGraphics();
 		g.setColor(Color.RED);
 		g.setFont(g.getFont().deriveFont(30f));
-		g.drawString(String.valueOf(gameData.getScore()), 50, 50);
+		g.drawString("Puntuación: " + String.valueOf(gameData.getScore()), getWidth() - 350, Scenario.GRASS_STROKE);
+	}
+	
+	private void paintTries(ITejo gameData) {
+		Graphics g = background.getGraphics();
+		g.setColor(Color.RED);
+		g.setFont(g.getFont().deriveFont(30f));
+		g.drawString("Intentos: " + String.valueOf(gameData.getTries()), getWidth() - 350, Scenario.GRASS_STROKE + 30);
 	}
 
 	public BufferedImage getBackgroundGraph() {
 		return background;
 	}
-	
 
 	private void paintBackground() {
 		if (background == null) {
@@ -89,14 +97,14 @@ public class Scenario extends JPanel {
 		Graphics g = background.getGraphics();
 		g.drawImage(imgGamer, gameData.getGamerPosition(), Gamer.Y, Gamer.SIZE, Gamer.SIZE, this);
 	}
-	
+
 	public void paintArrow(ITejo gameData) {
 		Graphics g = background.getGraphics();
 		int[] points = gameData.getArrowPoints();
-		g.setColor(Color.RED);
+		g.setColor(Color.WHITE);
 		g.drawLine(points[0], points[1], points[2], points[3]);
 	}
-	
+
 	public void paintPower(ITejo gameData) {
 		Graphics g = background.getGraphics();
 		int[] points = gameData.getPowerLine();
@@ -108,26 +116,25 @@ public class Scenario extends JPanel {
 		Graphics g = background.getGraphics();
 		g.drawImage(imgTejo, gameData.getXTejoPosition(), gameData.getYTejoPosition(), Tejo.SIZE, Tejo.SIZE, this);
 	}
-	
+
 	public void paintTejoBox(ITejo gameData) {
 		Graphics g = background.getGraphics();
 		g.setColor(Color.decode("#68401D"));
-		g.fillRect(TejoBox.X-10, TejoBox.Y, TejoBox.SIZE_X+20, TejoBox.SIZE_Y+10);
+		g.fillRect(TejoBox.X - 10, TejoBox.Y, TejoBox.SIZE_X + 20, TejoBox.SIZE_Y + 10);
 		g.setColor(Color.decode("#E0C444"));
 		g.fillRect(TejoBox.X, TejoBox.Y, TejoBox.SIZE_X, TejoBox.SIZE_Y);
 	}
-	
+
 	public void paintMecha(ITejo gameData) {
 		Graphics g = background.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(gameData.getMechaX(), TejoBox.Y, Mecha.SIZE_X, Mecha.SIZE_Y);
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(background, 0, 0, this);
 	}
-
 
 }
