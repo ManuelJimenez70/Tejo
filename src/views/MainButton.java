@@ -12,6 +12,7 @@ public class MainButton extends JButton{
 	
 	
 	public MainButton(String text, String command, ActionListener actionListener, Color color) {
+		setPreferredSize(new Dimension(100,60));
 		setText(text);
 		addActionListener(actionListener);
 		setActionCommand(command);

@@ -2,6 +2,11 @@ package models;
 
 public interface ITejo {
     int getGamerPosition();
-    Tejo getTejo();
     int getActualScore();
+	int getXTejoPosition();
+	int[] getArrowPoints();
+	int getYTejoPosition();
+	int[] getPowerLine();
+	int getMechaX();
+	int getScore();
 }

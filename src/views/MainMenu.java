@@ -44,7 +44,7 @@ public class MainMenu extends JPanel {
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		c.insets.set(25, 5, 5, 25);
-		this.add(menuMessage);
+		this.add(menuMessage,c);
 		c.gridy = 1;
 		this.add(btnStart, c);
 		c.gridy = 2;
