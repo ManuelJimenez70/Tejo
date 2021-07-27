@@ -37,5 +37,9 @@ public class PanelGame extends JPanel{
 	public BufferedImage getBackgroundGraph() {
 		return scenario.background;
 	}
+
+	public void focusPanel() {
+		scenario.focusPanel();
+	}
 	
 }

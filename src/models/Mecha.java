@@ -2,6 +2,8 @@ package models;
 
 import java.awt.Rectangle;
 
+import views.MyAudio;
+
 public class Mecha {
 	
 	public static final int SIZE_X = 30;
@@ -11,6 +13,7 @@ public class Mecha {
 	private int x;
 
 	public Mecha(int x) {
+
 		this.x = x;
 	}
 	
@@ -20,6 +23,6 @@ public class Mecha {
 	
     public boolean checkMechaCollision(Tejo tejo){
         Rectangle mechaRec = new Rectangle(x, TejoBox.Y, SIZE_X, SIZE_Y);
-        return mechaRec.intersects(new Rectangle(tejo.getX(), tejo.getY(), Tejo.SIZE, Tejo.SIZE));
+        return mechaRec.intersects(new Rectangle(tejo.getX(), tejo.getY(), Tejo.SIZE_X, Tejo.SIZE_Y));
     }
 }

@@ -51,6 +51,11 @@ public class Scenario extends JPanel {
 	public void init() {
 		paintBackground();
 	}
+	
+	public void focusPanel() {
+		setFocusable(true);
+		requestFocus();
+	}
 
 	public void updateGame(ITejo gameData) {
 		paintBackground();
@@ -114,7 +119,7 @@ public class Scenario extends JPanel {
 
 	public void paintTejo(ITejo gameData) {
 		Graphics g = background.getGraphics();
-		g.drawImage(imgTejo, gameData.getXTejoPosition(), gameData.getYTejoPosition(), Tejo.SIZE, Tejo.SIZE, this);
+		g.drawImage(imgTejo, gameData.getXTejoPosition(), gameData.getYTejoPosition(), Tejo.SIZE_X, Tejo.SIZE_Y, this);
 	}
 
 	public void paintTejoBox(ITejo gameData) {

@@ -1,5 +1,4 @@
-/controller/
 /models/
-/runner/
-/views/
 /resources/
+/controller/
+/views/

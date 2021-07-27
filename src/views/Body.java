@@ -3,8 +3,10 @@ package views;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -19,7 +21,7 @@ public class Body extends JPanel{
 	private PanelGame panelGame;
 	private Store store;
 	private CardLayout cardLayout;
-	
+	private int maxScore;
 
 	public Body(ActionListener actionListener, KeyListener keyListener) {
 		cardLayout = new CardLayout();
@@ -36,7 +38,7 @@ public class Body extends JPanel{
 		add(panelGame, Events.EVENT_SCENARIO);
 		this.panelGame.init();
 		
-		this.pauseMenu = new PauseMenu(actionListener, panelGame.getBackgroundGraph());
+		this.pauseMenu = new PauseMenu(actionListener, panelGame.getBackgroundGraph(), keyListener);
 		add(pauseMenu, Events.EVENT_PAUSE_MENU);
 		
 		this.store = new Store(actionListener);
@@ -51,7 +53,30 @@ public class Body extends JPanel{
 	}
 	
 	public void updateGame(ITejo gameData) {
+		updateScore(gameData);
 		panelGame.updateGame(gameData);
 	}
+	
+	private void updateScore(ITejo gameData) {
+		this.maxScore = gameData.getMaxScore();
+		repaint();
+	}
+	
+	
+	public void focusPanel() {
+		panelGame.focusPanel();
+	}
+	
+	public void focusPausePanel() {
+		pauseMenu.focusPausePanel();
+	}
 
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setColor(Color.RED);
+		g.setFont(g.getFont().deriveFont(30f));
+		g.drawString("Mejor Puntuación: " + String.valueOf(this.maxScore), getWidth() - 350, Scenario.GRASS_STROKE + 60);
+	}
+	
 }

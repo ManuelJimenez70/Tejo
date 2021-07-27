@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import models.FileManager;
 import models.Game;
 import views.View;
 
@@ -15,12 +16,14 @@ public class Controller implements ActionListener, KeyListener {
 
 	private View view;
 	private Game game;
+	private FileManager manager;
 
 	public Controller() {
+		this.manager = new FileManager();
 		this.game = new Game();
+		this.game.setMaxScore(manager.getMaxScore());
 		this.view = new View(this, this);
 		updateUi();
-
 	}
 
 	@Override
@@ -30,6 +33,7 @@ public class Controller implements ActionListener, KeyListener {
 			this.game = new Game();
 			updateUi();
 			view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
+			view.focusPanel();
 			break;
 		case Events.EVENT_STORE_GAME:
 			view.getCardLayout().show(view.getBody(), Events.EVENT_STORE_GAME);
@@ -38,10 +42,14 @@ public class Controller implements ActionListener, KeyListener {
 			view.dispose();
 			break;
 		case Events.EVENT_PAUSE_MENU:
+			view.setPaused(true);
 			view.getCardLayout().show(view.getBody(), Events.EVENT_PAUSE_MENU);
+			view.focusPausePanel();
 			break;
 		case Events.EVENT_RESUME_GAME:
+			view.setPaused(false);
 			view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
+			view.focusPanel();
 			break;
 		case Events.EVENT_MAIN_MENU:
 			view.getCardLayout().show(view.getBody(), Events.EVENT_MAIN_MENU);
@@ -59,6 +67,8 @@ public class Controller implements ActionListener, KeyListener {
 
 			} else {
 				view.updateGame(game);
+				manager.checkMaxScore(game.getScore());
+				game.setMaxScore(manager.getMaxScore());
 			}
 		});
 		timerUpdater.start();
@@ -87,13 +97,33 @@ public class Controller implements ActionListener, KeyListener {
 		int code = e.getExtendedKeyCode();
 		switch (code) {
 		case KeyEvent.VK_UP:
-			game.moveArrowUp();
+			if (!game.isShooting() && !view.isPaused()) {
+				game.moveArrowUp();
+
+			}
 			break;
 		case KeyEvent.VK_DOWN:
-			game.moveArrowDown();
+			if (!game.isShooting() && !view.isPaused()) {
+				game.moveArrowDown();
+
+			}
 			break;
 		case KeyEvent.VK_SPACE:
-			updatePower();
+			if (!game.isShooting() && !view.isPaused()) {
+				updatePower();
+			}
+			break;
+
+		case KeyEvent.VK_ESCAPE:
+			if (view.isPaused()) {
+				view.setPaused(false);
+				view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
+				view.focusPanel();
+			}else if(!view.isPaused()){
+				view.setPaused(true);
+				view.getCardLayout().show(view.getBody(), Events.EVENT_PAUSE_MENU);
+				view.focusPausePanel();
+			}
 			break;
 		default:
 			;

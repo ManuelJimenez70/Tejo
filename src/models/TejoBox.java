@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
+import views.MyAudio;
 import views.Scenario;
 
 public class TejoBox {
@@ -40,7 +41,7 @@ public class TejoBox {
 	
     public boolean checkTejoBoxCollision(Tejo tejo){
         Rectangle boxRec = new Rectangle(X, Y, SIZE_X, SIZE_Y);
-        return boxRec.intersects(new Rectangle(tejo.getX(), tejo.getY(), Tejo.SIZE, Tejo.SIZE));
+        return boxRec.intersects(new Rectangle(tejo.getX(), tejo.getY(), Tejo.SIZE_X, Tejo.SIZE_Y));
     }
     
     public boolean checkMechaCollision(Tejo tejo) {

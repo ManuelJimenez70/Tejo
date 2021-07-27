@@ -6,9 +6,10 @@ import views.Scenario;
 
 public class Tejo extends Thread {
 
-	public static final int SIZE = 30;
+	public static final int SIZE_X = 30;
+	public static final int SIZE_Y = 18;
 	public static final int INITIAL_Y = 750;
-	public static final int INITIAL_X = Gamer.INITIAL_X + Gamer.SIZE - SIZE;
+	public static final int INITIAL_X = Gamer.INITIAL_X + Gamer.SIZE - SIZE_X;
 	public static final int MOVE_SIZE = 5;
 	public static final double GRAVITY = 9.81;
 	public static final int FLOOR = Toolkit.getDefaultToolkit().getScreenSize().height - Scenario.GRASS_STROKE;
@@ -47,7 +48,7 @@ public class Tejo extends Thread {
 	@Override
 	public void run() {
 		super.run();
-		while (y <= FLOOR - SIZE + 15) {
+		while (y <= FLOOR - SIZE_X + 15) {
 			if (isShooting) {
 				time += 0.1;
 				x = (int) (INITIAL_X + xVelocity * time);

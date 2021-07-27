@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -28,10 +29,16 @@ public class PauseMenu extends JPanel {
 	private JLabel menuMessage;
 	private BufferedImage image;
 
-	public PauseMenu(ActionListener actionListener, BufferedImage image) {
+	public PauseMenu(ActionListener actionListener, BufferedImage image, KeyListener keyListener) {
 		this.image = image;
 		setLayout(new GridBagLayout());
+		addKeyListener(keyListener);
 		initComponents(actionListener);
+	}
+	
+	public void focusPausePanel() {
+		setFocusable(true);
+		requestFocus();
 	}
 
 	private void initComponents(ActionListener actionListener) {

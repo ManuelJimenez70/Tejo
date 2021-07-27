@@ -10,4 +10,5 @@ public interface ITejo {
 	int getMechaX();
 	int getScore();
 	int getTries();
+	int getMaxScore();
 }

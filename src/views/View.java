@@ -14,6 +14,7 @@ public class View extends JFrame {
 
 	private static final String TITTLE = "Titulo";
 	private Body body;
+	private boolean isPaused;
 
 	public View(ActionListener actionListener, KeyListener keyListener) {
 		super();
@@ -27,6 +28,7 @@ public class View extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
+		this.setFocusable(false);
 		this.setVisible(true);
 	}
 
@@ -46,5 +48,22 @@ public class View extends JFrame {
 	public void updateGame(ITejo gameData) {
 		body.updateGame(gameData);
 	}
+
+	public void focusPanel() {
+		body.focusPanel();
+	}
+
+	public void focusPausePanel() {
+		body.focusPausePanel();
+	}
+	
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
+	}
+
 
 }

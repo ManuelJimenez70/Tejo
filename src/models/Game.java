@@ -1,7 +1,10 @@
 package models;
 
+import java.applet.AudioClip;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import views.MyAudio;
 
 public class Game extends Thread implements ITejo {
 
@@ -9,13 +12,18 @@ public class Game extends Thread implements ITejo {
 	private Tejo tejo;
 	private Gamer gamer;
 	private Arrow arrow;
-	private TejoBox box; 
+	private TejoBox box;
 	private boolean play;
 	private int shoots;
 	private int score;
 	private Random random;
+	private int maxScore;
+	private MyAudio sandScore;
+	private MyAudio mechaScore;
 
 	public Game() {
+		this.sandScore = new MyAudio(getClass().getResource("/resources/audios/sandScore.wav"));
+		this.mechaScore = new MyAudio(getClass().getResource("/resources/audios/mechaScore.wav"));
 		this.random = new Random();
 		score = 0;
 		tejo = new Tejo();
@@ -24,6 +32,7 @@ public class Game extends Thread implements ITejo {
 		arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE, random.nextInt(Arrow.MAX_ANGLE));
 		play = true;
 		shoots = 0;
+		maxScore = 0;
 		start();
 	}
 
@@ -39,17 +48,27 @@ public class Game extends Thread implements ITejo {
 		}
 	}
 
+	public void playSound(AudioClip sound) {
+		new Thread() {
+			@Override
+			public void run() {
+				sound.play();
+			}
+		}.start();
+	}
+
 	private void checkCollisions() {
 		generateNewTejo();
 		if (box.checkMechaCollision(tejo)) {
 			score += Mecha.SCORE_MECHA;
+			playSound(this.mechaScore.getAudio());
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
-		if (box.checkTejoBoxCollision(tejo)) {
+		} else if (box.checkTejoBoxCollision(tejo)) {
+			playSound(this.sandScore.getAudio());
 			score += TejoBox.SCORE_TEJOBOX;
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
@@ -67,7 +86,7 @@ public class Game extends Thread implements ITejo {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			tejo = new Tejo(); 
+			tejo = new Tejo();
 			box.generateNewMecha();
 			shoots++;
 		}
@@ -127,7 +146,7 @@ public class Game extends Thread implements ITejo {
 	public boolean isShooting() {
 		return tejo.IsShooting();
 	}
-	
+
 	public boolean isUpPower() {
 		return arrow.isUpPower();
 	}
@@ -157,8 +176,20 @@ public class Game extends Thread implements ITejo {
 
 	@Override
 	public int getTries() {
-		return 5- shoots;
+		return 5 - shoots;
 	}
 
+	public void setMaxScore(int maxScore) {
+		this.maxScore = maxScore;
+	}
+
+	@Override
+	public int getMaxScore() {
+		return this.maxScore;
+	}
+
+	public boolean isShooted() {
+		return tejo.isShooted();
+	}
 
 }
