@@ -64,6 +64,7 @@ public class Scenario extends JPanel {
 		paintTejoBox(gameData);
 		paintMecha(gameData);
 		paintScore(gameData);
+		paintMaxScore(gameData);
 		paintArrow(gameData);
 		paintPower(gameData);
 		paintTries(gameData);
@@ -75,6 +76,13 @@ public class Scenario extends JPanel {
 		g.setColor(Color.RED);
 		g.setFont(g.getFont().deriveFont(30f));
 		g.drawString("Puntuación: " + String.valueOf(gameData.getScore()), getWidth() - 350, Scenario.GRASS_STROKE);
+	}
+	
+	private void paintMaxScore(ITejo gameData) {
+		Graphics g = background.getGraphics();
+		g.setColor(Color.RED);
+		g.setFont(g.getFont().deriveFont(30f));
+		g.drawString("Mejor Puntuación: " + String.valueOf(gameData.getMaxScore()), getWidth() - 350, Scenario.GRASS_STROKE + 60);
 	}
 	
 	private void paintTries(ITejo gameData) {
@@ -94,7 +102,7 @@ public class Scenario extends JPanel {
 		}
 		Graphics g = background.getGraphics();
 		g.drawImage(imgBack, 0, 0, getWidth(), getHeight() - GRASS_STROKE, this);
-		g.setColor(Color.decode("#77A06A"));
+		g.setColor(Color.GRAY);
 		g.fillRect(0, getHeight() - GRASS_STROKE, getWidth(), getHeight());
 	}
 

@@ -20,10 +20,13 @@ public class Game extends Thread implements ITejo {
 	private int maxScore;
 	private MyAudio sandScore;
 	private MyAudio mechaScore;
+	private MyAudio groundScore;
+
 
 	public Game() {
 		this.sandScore = new MyAudio(getClass().getResource("/resources/audios/sandScore.wav"));
 		this.mechaScore = new MyAudio(getClass().getResource("/resources/audios/mechaScore.wav"));
+		this.groundScore = new MyAudio(getClass().getResource("/resources/audios/groundScore.wav"));
 		this.random = new Random();
 		score = 0;
 		tejo = new Tejo();
@@ -70,6 +73,13 @@ public class Game extends Thread implements ITejo {
 		} else if (box.checkTejoBoxCollision(tejo)) {
 			playSound(this.sandScore.getAudio());
 			score += TejoBox.SCORE_TEJOBOX;
+			try {
+				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}else if(Ground.checkTejoCollision(tejo)){
+			playSound(this.groundScore.getAudio());
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {

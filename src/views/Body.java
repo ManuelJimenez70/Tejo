@@ -53,15 +53,9 @@ public class Body extends JPanel{
 	}
 	
 	public void updateGame(ITejo gameData) {
-		updateScore(gameData);
+		mainMenu.updateGame(gameData);
 		panelGame.updateGame(gameData);
 	}
-	
-	private void updateScore(ITejo gameData) {
-		this.maxScore = gameData.getMaxScore();
-		repaint();
-	}
-	
 	
 	public void focusPanel() {
 		panelGame.focusPanel();
@@ -71,12 +65,5 @@ public class Body extends JPanel{
 		pauseMenu.focusPausePanel();
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		g.setColor(Color.RED);
-		g.setFont(g.getFont().deriveFont(30f));
-		g.drawString("Mejor Puntuación: " + String.valueOf(this.maxScore), getWidth() - 350, Scenario.GRASS_STROKE + 60);
-	}
 	
 }

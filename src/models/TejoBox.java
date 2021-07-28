@@ -12,7 +12,8 @@ public class TejoBox {
 	public static final int SIZE_X = 250;
 	public static final int SIZE_Y = 100;
 	public static final int SCORE_TEJOBOX = 100;
-	public static final int X = Toolkit.getDefaultToolkit().getScreenSize().width - SIZE_X - 150;
+	public static final int INSENT_TEJOBOX = 150;
+	public static final int X = Toolkit.getDefaultToolkit().getScreenSize().width - SIZE_X - INSENT_TEJOBOX;
 	public static final int Y = Toolkit.getDefaultToolkit().getScreenSize().height - Scenario.GRASS_STROKE;
 
 	private Mecha mecha;
