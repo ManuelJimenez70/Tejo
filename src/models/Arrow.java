@@ -3,7 +3,7 @@ package models;
 public class Arrow {
 	
     private static final int INITIAL_POWER = 5;
-	public static final int START_Y = 750;
+	public static final int START_Y = Tejo.INITIAL_Y;
     public static final int START_X = Tejo.INITIAL_X + Tejo.SIZE_X;
     public static final int MAX_ANGLE = 50;
     public static final int MOVE_ARROW_SIZE = 3;

@@ -8,8 +8,8 @@ public class Tejo extends Thread {
 
 	public static final int SIZE_X = 30;
 	public static final int SIZE_Y = 18;
-	public static final int INITIAL_Y = 750;
-	public static final int INITIAL_X = Gamer.INITIAL_X + Gamer.SIZE - SIZE_X;
+	public static final int INITIAL_Y = Gamer.Y + Gamer.SIZE_Y/2 + SIZE_Y;
+	public static final int INITIAL_X = Gamer.INITIAL_X + Gamer.SIZE_X - SIZE_X;
 	public static final int MOVE_SIZE = 5;
 	public static final double GRAVITY = 9.81;
 	public static final int FLOOR = Toolkit.getDefaultToolkit().getScreenSize().height - Scenario.GRASS_STROKE;

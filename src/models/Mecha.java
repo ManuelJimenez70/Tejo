@@ -8,7 +8,7 @@ public class Mecha {
 	
 	public static final int SIZE_X = 30;
 	public static final int SIZE_Y = 10;
-	public static final int SCORE_MECHA = 200;
+	public static final int SCORE_MECHA = 300;
 	
 	private int x;
 

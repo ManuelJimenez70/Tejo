@@ -108,7 +108,7 @@ public class Scenario extends JPanel {
 
 	public void paintHero(ITejo gameData) {
 		Graphics g = background.getGraphics();
-		g.drawImage(imgGamer, gameData.getGamerPosition(), Gamer.Y, Gamer.SIZE, Gamer.SIZE, this);
+		g.drawImage(imgGamer, gameData.getGamerPosition(), Gamer.Y, Gamer.SIZE_X, Gamer.SIZE_Y, this);
 	}
 
 	public void paintArrow(ITejo gameData) {

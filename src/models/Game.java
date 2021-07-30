@@ -9,6 +9,9 @@ import views.MyAudio;
 public class Game extends Thread implements ITejo {
 
 	public static final int MAX_SHOOTS = 5;
+	public static final int SCORE_SCENARIO_1 = 300;
+	public static final int SCORE_SCENARIO_2 = 300;
+
 	private Tejo tejo;
 	private Gamer gamer;
 	private Arrow arrow;
@@ -32,7 +35,7 @@ public class Game extends Thread implements ITejo {
 		tejo = new Tejo();
 		gamer = new Gamer();
 		box = new TejoBox();
-		arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE, random.nextInt(Arrow.MAX_ANGLE));
+		arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE_X, random.nextInt(Arrow.MAX_ANGLE));
 		play = true;
 		shoots = 0;
 		maxScore = 0;
@@ -166,7 +169,7 @@ public class Game extends Thread implements ITejo {
 	}
 
 	public void setArrow() {
-		this.arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE, random.nextInt(Arrow.MAX_ANGLE));
+		this.arrow = new Arrow(Gamer.INITIAL_X + Gamer.SIZE_X, random.nextInt(Arrow.MAX_ANGLE));
 	}
 
 	@Override
