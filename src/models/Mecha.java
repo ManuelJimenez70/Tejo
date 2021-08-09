@@ -2,8 +2,6 @@ package models;
 
 import java.awt.Rectangle;
 
-import views.MyAudio;
-
 public class Mecha {
 	
 	public static final int SIZE_X = 30;

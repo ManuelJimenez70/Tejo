@@ -13,6 +13,10 @@ import models.ITejo;
 
 public class PanelGame extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE_HEADER = 50;
 	private MainButton pausebtn;
 	private Scenario scenario;

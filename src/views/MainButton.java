@@ -11,6 +11,11 @@ public class MainButton extends JButton{
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public MainButton(String text, String command, ActionListener actionListener, Color color) {
 		setPreferredSize(new Dimension(100,60));
 		setText(text);

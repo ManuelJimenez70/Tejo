@@ -10,12 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.util.Objects;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import controller.Events;
 import models.Gamer;
 import models.ITejo;
 import models.Mecha;
@@ -24,6 +20,10 @@ import models.TejoBox;
 
 public class Scenario extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final URL BACKGROUND_IMAGE = View.class.getResource("/resources/images/backgroundImage.png");
 	private static final URL TEJO_IMAGE = View.class.getResource("/resources/images/tejoImage.png");
 	private static final URL GAMER_IMAGE = View.class.getResource("/resources/images/gamerImage.png");

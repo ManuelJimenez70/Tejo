@@ -13,6 +13,10 @@ import controller.Events;
 
 public class Store extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final int SIZE_HEADER = 50;
 	private JPanel header;
 	private MainButton backbtn;

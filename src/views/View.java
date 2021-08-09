@@ -12,6 +12,10 @@ import models.ITejo;
 
 public class View extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String TITTLE = "Titulo";
 	private Body body;
 	private boolean isPaused;

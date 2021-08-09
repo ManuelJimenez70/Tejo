@@ -2,12 +2,8 @@ package views;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
 
 import controller.Events;
@@ -15,14 +11,16 @@ import models.ITejo;
 
 public class Body extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MainMenu mainMenu;
 	private PauseMenu pauseMenu;
 	private GameOverMenu gameOverMenu;
 	private PanelGame panelGame;
 	private Store store;
 	private CardLayout cardLayout;
-	private int maxScore;
-
 	public Body(ActionListener actionListener, KeyListener keyListener) {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);

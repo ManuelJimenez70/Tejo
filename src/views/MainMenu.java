@@ -1,25 +1,24 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import controller.Events;
 import models.ITejo;
 
 public class MainMenu extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String START_GAME_TEXT = "Comenzar Juego";
 	private static final String EXIT_GAME_TEXT = "Salir";
 	private static final String STORE_GAME_TEXT = "Tienda";

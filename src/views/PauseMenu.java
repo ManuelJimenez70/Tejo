@@ -4,13 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +17,10 @@ import controller.Events;
 
 public class PauseMenu extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final URL MENU_HEADER = View.class.getResource("/resources/images/tejoHeader.png");
 	private static final String EXIT_GAME_TEXT = "Salir";
 	private static final String MAIN_MENU_TEXT = "Menu Principal";

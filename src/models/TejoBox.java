@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-import views.MyAudio;
 import views.Scenario;
 
 public class TejoBox {

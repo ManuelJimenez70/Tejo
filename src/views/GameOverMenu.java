@@ -17,6 +17,10 @@ import controller.Events;
 
 public class GameOverMenu extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final URL MENU_HEADER = View.class.getResource("/resources/images/tejoHeader.png");
 	private static final URL GAME_OVER_HEADER = View.class.getResource("/resources/images/gameOverHeader.png");
 	private static final String RESTART_GAME_TEXT = "Reintentar";
