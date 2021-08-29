@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.swing.Timer;
 
@@ -20,8 +23,9 @@ public class Controller implements ActionListener, KeyListener {
 	public Controller() {
 		this.manager = new FileManager();
 		this.game = new Game();
+		this.game.setInitialMoney(manager.getMoney());
 		this.game.setMaxScore(manager.getMaxScore());
-		this.view = new View(this, this);
+		this.view = new View(this, this, game);
 		updateUi();
 	}
 
@@ -36,9 +40,10 @@ public class Controller implements ActionListener, KeyListener {
 			break;
 		case Events.EVENT_STORE_GAME:
 			view.getCardLayout().show(view.getBody(), Events.EVENT_STORE_GAME);
+			view.focusPausePanel();
 			break;
 		case Events.EVENT_EXIT_GAME:
-			view.dispose();
+			view.dispatchEvent(new WindowEvent(view, WindowEvent.WINDOW_CLOSING));
 			break;
 		case Events.EVENT_PAUSE_MENU:
 			view.setPaused(true);
@@ -47,12 +52,18 @@ public class Controller implements ActionListener, KeyListener {
 			break;
 		case Events.EVENT_RESUME_GAME:
 			view.setPaused(false);
+			view.focusPausePanel();
 			view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
 			view.focusPanel();
 			break;
 		case Events.EVENT_MAIN_MENU:
 			view.getCardLayout().show(view.getBody(), Events.EVENT_MAIN_MENU);
+			view.focusPausePanel();
 			break;
+		case Events.BUY_HAT:
+			System.out.println("llega");
+			game.setGamerHat(2);
+			view.buyHat(2, this.game);
 		default:
 			break;
 		}
@@ -60,14 +71,18 @@ public class Controller implements ActionListener, KeyListener {
 
 	private void updateUi() {
 		final Timer timerUpdater = new Timer(1, e -> {
-			if (game.getShootsNumber() == Game.MAX_SHOOTS) {
+			if (game.getShootsNumber() == Game.MAX_SHOOTS || game.getScenarioNumber() == Game.MAX_SCENARIOS) {
 				((Timer) e.getSource()).stop();
 				view.getCardLayout().show(view.getBody(), Events.EVENT_GAME_OVER);
-
+				game.setMoney(game.getScore());
+				manager.setMoney(game.getMoney());
+				view.updateGame(game);
 			} else {
 				view.updateGame(game);
-				manager.checkMaxScore(game.getScore());
-				game.setMaxScore(manager.getMaxScore());
+				if (manager.checkMaxScore(game.getScore())) {
+					game.setMaxScore(manager.getMaxScore());
+
+				}
 			}
 		});
 		timerUpdater.start();
@@ -118,7 +133,7 @@ public class Controller implements ActionListener, KeyListener {
 				view.setPaused(false);
 				view.getCardLayout().show(view.getBody(), Events.EVENT_SCENARIO);
 				view.focusPanel();
-			}else if(!view.isPaused()){
+			} else if (!view.isPaused()) {
 				view.setPaused(true);
 				view.getCardLayout().show(view.getBody(), Events.EVENT_PAUSE_MENU);
 				view.focusPausePanel();

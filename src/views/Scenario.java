@@ -20,19 +20,21 @@ import models.TejoBox;
 
 public class Scenario extends JPanel {
 
+	private static final String GAMER_IMAGE = "/resources/images/gamerImage";
+	private static final String BACKGROUND_IMAGE = "/resources/images/backgroundImage";
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final URL BACKGROUND_IMAGE = View.class.getResource("/resources/images/backgroundImage.png");
-	private static final URL TEJO_IMAGE = View.class.getResource("/resources/images/tejoImage.png");
-	private static final URL GAMER_IMAGE = View.class.getResource("/resources/images/gamerImage.png");
+	private static final URL TEJO_IMAGE = View.class.getResource("/resources/images/tejoImage1.png");
 	public static final int GRASS_STROKE = 200;
 
 	public BufferedImage background;
-	private final Image imgBack;
-	private final Image imgTejo;
-	private final Image imgGamer;
+	private  Image imgBack;
+	private  Image imgTejo;
+	private  Image imgGamer;
+	private int scenarioNumber;
+	private int gamerHat;
 
 	public Scenario(ActionListener actionListener, KeyListener keyListener) {
 		Dimension s = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,14 +44,16 @@ public class Scenario extends JPanel {
 		setFocusCycleRoot(true);
 		setFocusable(true);
 		setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize()));
-		imgBack = new ImageIcon(Toolkit.getDefaultToolkit().getImage(BACKGROUND_IMAGE)).getImage();
+		scenarioNumber = 1;
+		gamerHat = 1;
+		imgBack = new ImageIcon(Toolkit.getDefaultToolkit().getImage(View.class.getResource(BACKGROUND_IMAGE + "1.png"))).getImage();
 		imgTejo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(TEJO_IMAGE)).getImage();
-		imgGamer = new ImageIcon(Toolkit.getDefaultToolkit().getImage(GAMER_IMAGE)).getImage();
+		imgGamer = new ImageIcon(Toolkit.getDefaultToolkit().getImage(View.class.getResource(GAMER_IMAGE + ".png"))).getImage();
 		addKeyListener(keyListener);
 	}
 
-	public void init() {
-		paintBackground();
+	public void init(ITejo gameData) {
+		paintBackground(gameData);
 	}
 	
 	public void focusPanel() {
@@ -58,7 +62,7 @@ public class Scenario extends JPanel {
 	}
 
 	public void updateGame(ITejo gameData) {
-		paintBackground();
+		paintBackground(gameData);
 		paintHero(gameData);
 		paintTejo(gameData);
 		paintTejoBox(gameData);
@@ -68,7 +72,15 @@ public class Scenario extends JPanel {
 		paintArrow(gameData);
 		paintPower(gameData);
 		paintTries(gameData);
+		paintScoreToPass(gameData);
 		repaint();
+	}
+
+	private void paintScoreToPass(ITejo gameData) {
+		Graphics g = background.getGraphics();
+		g.setColor(Color.WHITE);
+		g.setFont(g.getFont().deriveFont(30f));
+		g.drawString("Puntuación Para el Siguiente nivel: " + String.valueOf(gameData.getScoreToPass()), getWidth()/3, getHeight()- Scenario.GRASS_STROKE/2);		
 	}
 
 	private void paintScore(ITejo gameData) {
@@ -96,7 +108,13 @@ public class Scenario extends JPanel {
 		return background;
 	}
 
-	private void paintBackground() {
+	private void paintBackground(ITejo gameData) {
+		if (this.scenarioNumber != gameData.getScenarioNumber()) {
+			this.scenarioNumber = gameData.getScenarioNumber();
+			imgBack = new ImageIcon(Toolkit.getDefaultToolkit().getImage(View.class.getResource(BACKGROUND_IMAGE + "" + this.scenarioNumber + ".png"))).getImage();
+
+
+		}
 		if (background == null) {
 			background = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
 		}
@@ -108,6 +126,10 @@ public class Scenario extends JPanel {
 
 	public void paintHero(ITejo gameData) {
 		Graphics g = background.getGraphics();
+		if (this.gamerHat != gameData.getGamerHat()) {
+			this.gamerHat = gameData.getGamerHat();
+			imgGamer = new ImageIcon(Toolkit.getDefaultToolkit().getImage(View.class.getResource(GAMER_IMAGE + "1.png"))).getImage();
+		}
 		g.drawImage(imgGamer, gameData.getGamerPosition(), Gamer.Y, Gamer.SIZE_X, Gamer.SIZE_Y, this);
 	}
 

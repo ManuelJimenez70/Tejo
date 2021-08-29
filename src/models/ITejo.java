@@ -11,4 +11,9 @@ public interface ITejo {
 	int getScore();
 	int getTries();
 	int getMaxScore();
+	int getMoney();
+	int getScoreToPass();
+	int getScenarioNumber();
+	int getGamerHat();
+	void setMoneyByStore(int i);
 }

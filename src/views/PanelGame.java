@@ -34,8 +34,8 @@ public class PanelGame extends JPanel{
 		scenario.updateGame(gameData);
 	}
 
-	public void init() {
-		scenario.init();
+	public void init(ITejo gameData) {
+		scenario.init(gameData);
 	}
 
 	public BufferedImage getBackgroundGraph() {

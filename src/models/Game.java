@@ -9,8 +9,8 @@ import views.MyAudio;
 public class Game extends Thread implements ITejo {
 
 	public static final int MAX_SHOOTS = 5;
-	public static final int SCORE_SCENARIO_1 = 300;
-	public static final int SCORE_SCENARIO_2 = 300;
+
+	public static final int MAX_SCENARIOS = 6;
 
 	private Tejo tejo;
 	private Gamer gamer;
@@ -20,10 +20,14 @@ public class Game extends Thread implements ITejo {
 	private int shoots;
 	private int score;
 	private Random random;
+	private int money;
 	private int maxScore;
 	private MyAudio sandScore;
 	private MyAudio mechaScore;
 	private MyAudio groundScore;
+	private int scenarioNumber;
+	private int scoreToPassScenario;
+	private int gamerHat;
 
 
 	public Game() {
@@ -31,6 +35,9 @@ public class Game extends Thread implements ITejo {
 		this.mechaScore = new MyAudio(getClass().getResource("/resources/audios/mechaScore.wav"));
 		this.groundScore = new MyAudio(getClass().getResource("/resources/audios/groundScore.wav"));
 		this.random = new Random();
+		scenarioNumber = 1;
+		gamerHat = 1;
+		scoreToPassScenario = 300;
 		score = 0;
 		tejo = new Tejo();
 		gamer = new Gamer();
@@ -39,6 +46,7 @@ public class Game extends Thread implements ITejo {
 		play = true;
 		shoots = 0;
 		maxScore = 0;
+		money = 0;
 		start();
 	}
 
@@ -68,6 +76,7 @@ public class Game extends Thread implements ITejo {
 		if (box.checkMechaCollision(tejo)) {
 			score += Mecha.SCORE_MECHA;
 			playSound(this.mechaScore.getAudio());
+			checkScore();
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
@@ -76,6 +85,7 @@ public class Game extends Thread implements ITejo {
 		} else if (box.checkTejoBoxCollision(tejo)) {
 			playSound(this.sandScore.getAudio());
 			score += TejoBox.SCORE_TEJOBOX;
+			checkScore();
 			try {
 				Thread.sleep(TimeUnit.SECONDS.toMillis(1));
 			} catch (InterruptedException e) {
@@ -92,6 +102,50 @@ public class Game extends Thread implements ITejo {
 
 	}
 
+	private void checkScore() {
+		switch (scenarioNumber) {
+		case 1:
+			if (score>=scoreToPassScenario) {
+				shoots = 0;
+				scenarioNumber++;
+				scoreToPassScenario = 900;
+			}
+			break;
+		case 2:
+			if (score>=scoreToPassScenario) {
+				shoots = 0;
+				scenarioNumber++;
+				scoreToPassScenario = 1500;
+			}
+			break;
+		case 3:
+			if (score>=scoreToPassScenario) {
+				shoots = 0;
+				scenarioNumber++;
+				scoreToPassScenario = 2200;
+			}
+			break;
+		case 4:
+			if (score>=scoreToPassScenario) {
+				shoots = 0;
+				scenarioNumber++;
+				scoreToPassScenario = 3100;
+			}
+			break;
+		case 5:
+			if (score>=scoreToPassScenario) {
+				shoots = 0;
+				scenarioNumber++;
+				scoreToPassScenario = 4200;
+			}
+		case 6:
+
+			break;
+		default:
+			break;
+		}
+	}
+
 	private void generateNewTejo() {
 		if (tejo.isShooted()) {
 			try {
@@ -103,6 +157,14 @@ public class Game extends Thread implements ITejo {
 			box.generateNewMecha();
 			shoots++;
 		}
+	}
+	
+	public void setMoney(int score) {
+		this.money += score*2;
+	}
+	
+	public int getMoney() {
+		return money;
 	}
 
 	@Override
@@ -203,6 +265,34 @@ public class Game extends Thread implements ITejo {
 
 	public boolean isShooted() {
 		return tejo.isShooted();
+	}
+
+	@Override
+	public int getScoreToPass() {
+		return this.scoreToPassScenario;
+	}
+
+	@Override
+	public int getScenarioNumber() {
+		return this.scenarioNumber;
+	}
+
+	public void setInitialMoney(int money) {
+		this.money = money;
+	}
+
+	@Override
+	public int getGamerHat() {
+		return this.gamerHat;
+	}
+
+	public void setGamerHat(int hat) {
+		this.gamerHat = hat;
+	}
+
+	@Override
+	public void setMoneyByStore(int money) {
+		this.money = money;
 	}
 
 }

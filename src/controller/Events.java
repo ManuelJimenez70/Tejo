@@ -10,5 +10,6 @@ public class Events {
 	public static final String EVENT_PAUSE_MENU = "pauseMenu";
 	public static final String EVENT_RESUME_GAME = "resumeGame";
 	public static final String EVENT_GAME_OVER = "gameOver";
+	public static final String BUY_HAT = "hat2";
 
 }

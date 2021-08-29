@@ -44,7 +44,7 @@ public class Arrow {
 		if (angle>0) {
 			angle -= MOVE_ARROW_SIZE;
 		}else {
-			angle = MAX_ANGLE;
+			angle = 0;
 		}
 	}
 
@@ -53,7 +53,7 @@ public class Arrow {
 		if (angle < MAX_ANGLE) {
 			angle += MOVE_ARROW_SIZE;
 		}else {
-			angle = 0;
+			angle = MAX_ANGLE;
 		}
 	}
 
